@@ -104,9 +104,19 @@ std::wstring ConvertToFullWidth(const std::wstring& str) {
       wstext=std::regex_replace(wstext, std::wregex(L"\\[\u300d\\]"), L"\u300d");
     }
     if(type==0)return true;//未知类型
-    
+    std::wstring saveend=L"";
     auto innner=wstext.substr(0,wstext.size()-5);
     innner=std::regex_replace(innner, std::wregex(L"\\[eruby text=(.*?) str=(.*?)\\]"), L"$2");
+    if(innner[innner.size()-1]==L']'){
+      //「ボクの身体をあれだけ好き勝手しておいて、いまさらカマトトぶっても遅いよ。ほら、正直になりなよ」[waitsd layer=&CHAR6]
+      for(int i=innner.size();i>0;i--){
+        if(innner[i]=='['){
+          saveend=innner.substr(i);
+          innner=innner.substr(0,i);
+          break;
+        }
+      }
+    }
     auto newText = EngineController::instance()->dispatchTextWSTD(innner, Engine::ScenarioRole, 0);
     newText=newText+L"[plc]";
     if(type==2){
@@ -116,6 +126,7 @@ std::wstring ConvertToFullWidth(const std::wstring& str) {
       newText=std::regex_replace(newText, std::wregex(L"\u300c"), L"\\[\u300c\\]");
       newText=std::regex_replace(newText, std::wregex(L"\u300d"), L"\\[\u300d\\]");
     } 
+    newText+=saveend;
     wcscpy(text,newText.c_str()); 
     return true;
   }
