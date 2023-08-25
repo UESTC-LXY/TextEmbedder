@@ -5,6 +5,7 @@
 #include "engine/enginefactory.h"
 #include "windbg/util.h" 
 #include"engine/model/kirikiriz.h"
+#include"engine/model/kirikiri2.h"
 #include "engine/model/age.h"
 #include "engine/model/aoi.h"
 #include "engine/model/bgi.h"
@@ -68,7 +69,7 @@ EngineController *EngineFactory::createEngine()
        , new LucifenEngine, new DebonosuEngine
     , new MonoEngine , new NitroplusEngine
     , new MinoriEngine, new FVPEngine, new PensilEngine
-    , new UnicornEngine , new NextonEngine, new System4Engine,new EntisGLS,new kirikiriz
+    , new UnicornEngine , new NextonEngine, new System4Engine,new EntisGLS,new kirikiriz,new kirikiri2
   };
   for each (EngineModel *m in models) {
     auto p = new EngineController(m);

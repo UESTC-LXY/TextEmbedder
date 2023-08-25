@@ -209,6 +209,6 @@ bool SearchResourceString(LPCWSTR str)
 }
 bool kirikiriz::match()
 {
-  return CheckFile(L"*.xp3") || SearchResourceString(L"TVP(KIRIKIRI)");
+  return CheckFile(L"*.xp3") || SearchResourceString(L"TVP(KIRIKIRI) Z");
 }
 // EOF
